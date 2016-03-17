@@ -1,0 +1,27 @@
+include "ipp/schema/primitive.fbs";
+
+namespace ipp.schema.message.render;
+
+/**
+ * @command SceneRenderViewportResizeCommand
+ * @event SceneRenderViewportResizedEvent
+ *
+ * Command render system that target render viewport should be resized
+ */
+struct RenderViewportSize {
+    width: uint;
+    height: uint;
+}
+
+
+/**
+ * @command SceneRenderClearFlagsSetCommand
+ * @event SceneRenderClearFlagsUpdatedEvent
+ */
+struct RenderClearFlags {
+    color: ipp.schema.primitive.Vec4;
+    colorClearEnabled: uint;
+
+    depth: float;
+    depthClearEnabled: uint;
+}

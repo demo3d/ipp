@@ -1,0 +1,17 @@
+namespace ipp.schema.resource.render.texture;
+
+
+enum PixelFormat : uint {
+    RGB8
+}
+
+table Texture {
+    bitmap: [ubyte];
+    width: uint;
+    height: uint;
+    pixelFormat: PixelFormat;
+}
+
+root_type Texture;
+file_identifier "TBMP";
+file_extension "texture";

@@ -1,0 +1,43 @@
+include "ipp/schema/primitive.fbs";
+
+namespace ipp.schema.message.animation;
+
+
+/**
+ * Scene animation status enumerations
+ */
+enum AnimationStatus : uint {
+    Playing = 1,
+    Stopped,
+    Completed
+}
+
+/**
+ * @command SceneAnimationPlayCommand
+ *
+ * Animation play range from specified start time to end time in milliseconds
+ * End time 0 means that animation plays for the entire duration
+ */
+struct AnimationPlayRange {
+    start: uint;
+    end: uint;
+}
+
+/**
+ * @command SceneAnimationUpdateCommand
+ *
+ * DeltaTime in milliseconds, used to signal animation update
+ */
+struct AnimationDeltaTime {
+    deltaTime: uint;
+}
+
+/**
+ * @event SceneAnimationStateUpdatedEvent
+ *
+ * Dispatched by animation system to notify other systems that system state has changed
+ */
+struct AnimationState {
+    time: uint;
+    status: AnimationStatus;
+}

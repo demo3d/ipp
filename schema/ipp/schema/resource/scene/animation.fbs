@@ -1,0 +1,133 @@
+include "ipp/schema/primitive.fbs";
+
+namespace ipp.schema.resource.scene;
+
+
+struct BoolKeyFrame {
+    time: int;
+    value: bool;
+}
+
+struct IntKeyFrame {
+    time: int;
+    value: int;
+}
+
+enum InterpolationMode : int {
+    Constant,
+    Linear,
+    Bezier
+}
+
+struct FloatKeyFrame {
+    time: int;
+    value: float;
+    interpolationMode: InterpolationMode;
+    bezierLeft: ipp.schema.primitive.Vec2;
+    bezierRight: ipp.schema.primitive.Vec2;
+}
+
+
+enum NodeTransformProperty : int {
+    TranslationX = 0,
+    TranslationY,
+    TranslationZ,
+
+    RotationAxisAngleX,
+    RotationAxisAngleY,
+    RotationAxisAngleZ,
+    RotationAxisAngleAngle,
+
+    RotationEulerX,
+    RotationEulerY,
+    RotationEulerZ,
+
+    RotationQuaternionX,
+    RotationQuaternionY,
+    RotationQuaternionZ,
+    RotationQuaternionW,
+
+    ScaleX,
+    ScaleY,
+    ScaleZ
+}
+
+table NodeHiddenChannel {
+    keyFrames: [BoolKeyFrame];
+}
+
+table NodeTransformChannel {
+    property: NodeTransformProperty;
+    keyFrames: [FloatKeyFrame];
+}
+
+
+table ActiveCameraChannel {
+    keyFrames: [IntKeyFrame];
+}
+
+
+
+
+struct BonePoseKeyFrame {
+    time: int;
+    translation: ipp.schema.primitive.Vec3;
+    rotation: ipp.schema.primitive.Quat;
+    scale: float;
+}
+
+table BonePoseChannel {
+    bone: int;
+    keyFrames: [BonePoseKeyFrame];
+}
+
+
+
+union ChannelKind {
+    ActiveCameraChannel,
+    NodeHiddenChannel,
+    NodeTransformChannel,
+    BonePoseChannel
+}
+
+table Channel {
+    channel: ChannelKind;
+}
+
+table Action {
+    name: string;
+    channels: [Channel];
+}
+
+
+table Strip {
+    name: string;
+    trackOffset: int;
+    trackDuration: int;
+    actionIndex: uint;
+    actionOffset: int;
+    actionDuration: int;
+}
+
+table Track {
+    name: string;
+    strips: [Strip];
+}
+
+table EntitySequence {
+    entity: int;
+    actions: [Action];
+    tracks: [Track];
+}
+
+table SceneSequence {
+    actions: [Action];
+    tracks: [Track];
+}
+
+
+table Animation {
+    duration: int;
+    sceneSequence: SceneSequence;
+    entitiySequences: [EntitySequence];
+}

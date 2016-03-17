@@ -1,0 +1,17 @@
+namespace ipp.schema.resource.archive;
+
+
+table File {
+    name: string;
+    size: uint;
+}
+
+table Archive {
+    compression: string;
+    files: [File];
+}
+
+
+root_type Archive;
+file_identifier "ARCH";
+file_extension "ipparch";

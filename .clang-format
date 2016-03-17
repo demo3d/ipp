@@ -1,0 +1,19 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+ConstructorInitializerIndentWidth: 4
+AlignTrailingComments: true
+ColumnLimit: 100
+BreakBeforeBraces: Stroustrup
+PointerAlignment: Left
+IndentWidth: 4
+TabWidth: 4
+BreakConstructorInitializersBeforeComma: true
+IndentCaseLabels: true
+AlwaysBreakTemplateDeclarations: true
+AllowShortFunctionsOnASingleLine: false
+AllowShortBlocksOnASingleLine: false
+BinPackArguments: true
+BinPackParameters: false
+PenaltyReturnTypeOnItsOwnLine: 200

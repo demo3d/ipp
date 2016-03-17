@@ -1,0 +1,23 @@
+namespace ipp.schema.resource.render.effect;
+
+
+table EffectPass {
+    name: string;
+    renderPass: string;
+
+    vertexHeader: string;
+    vertexResourcePaths: [string];
+
+    fragmentHeader: string;
+    fragmentResourcePaths: [string];
+}
+
+table Effect {
+    vertexAttributes: [string];
+    passes: [EffectPass];
+}
+
+
+root_type Effect;
+file_identifier "EFET";
+file_extension "effect";

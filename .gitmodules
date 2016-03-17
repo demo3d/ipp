@@ -1,0 +1,15 @@
+[submodule "ipp/extern/cppformat"]
+	path = ipp/extern/cppformat
+	url = https://github.com/cppformat/cppformat.git
+[submodule "ipp/extern/Catch"]
+	path = ipp/extern/Catch
+	url = https://github.com/philsquared/Catch.git
+[submodule "ipp/extern/flatbuffers"]
+	path = ipp/extern/flatbuffers
+	url = https://github.com/google/flatbuffers.git
+[submodule "ipp/extern/glm"]
+	path = ipp/extern/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "ipp/extern/json"]
+	path = ipp/extern/json
+	url = https://github.com/nlohmann/json.git

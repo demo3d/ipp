@@ -1,0 +1,103 @@
+include "ipp/schema/primitive.fbs";
+
+namespace ipp.schema.message.camera;
+
+
+/**
+ * @command SceneCameraActiveTypeSetCommand
+ * @event SceneCameraActiveTypeUpdatedEvent
+ *
+ * System camera types
+ */
+enum CameraType : uint {
+    UserControlled = 1,
+    EntityComponent
+}
+
+/**
+ * @command SceneCameraNodeActiveSetCommand
+ * @event SceneCameraNodeActiveUpdatedEvent
+ *
+ * Change CameraNodeSystem active camera.
+ */
+struct CameraNodeActive {
+    entityId: uint;
+}
+
+/**
+ * @command SceneCameraUserControlledMoveCommand
+ *
+ * Move user camera target left/right up/down forward/backwards relative to camera rotation
+ */
+struct CameraUserControlledMove {
+    deltaPosition: ipp.schema.primitive.Vec3;
+}
+
+
+/**
+ * @command SceneCameraUserControlledRotatePolarCommand
+ */
+struct CameraUserControlledRotationPolar {
+    deltaLatitude: float;
+    deltaLongitude: float;
+}
+
+
+/**
+ * @command SceneCameraUserControlledRotationArcballStartCommand
+ *
+ * Start rotating camera at point specified by start point on screen.
+ * Point coordinate must be in -1, 1 range, [-1, -1] being bottom left of screen.
+ */
+struct CameraUserControlledRotationArcballStart {
+    point: ipp.schema.primitive.Vec2;
+}
+
+/**
+ * @command SceneCameraUserControlledRotationArcballUpdateCommand
+ *
+ * Rotating camera by rotating view position relative to view target by arcball angle/axis
+ * Point coordinate must be in -1, 1 range, [-1, -1] being bottom left of screen.
+ */
+struct CameraUserControlledRotationArcballUpdate {
+    point: ipp.schema.primitive.Vec2;
+}
+
+/**
+ * @command SceneCameraUserControlledZoomCommand
+ *
+ * Move user camera eye position toward to/away from target by specified distance
+ */
+struct CameraUserControlledZoom {
+    distance: float;
+}
+
+/**
+ * @command SceneCameraUserControlledStateSetCommand
+ * @event SceneCameraUserControlledStateUpdatedEvent
+ *
+ * Camera state data, can be dispatched as a Command to update user controlled Camera or
+ * received as an event every time Camera system state is modified
+ */
+struct CameraUserControlledState {
+    position: ipp.schema.primitive.Vec3;
+    target: ipp.schema.primitive.Vec3;
+    up: ipp.schema.primitive.Vec3;
+}
+
+/**
+ * @command SceneCameraUserControlledLimitsSetCommand
+ * @event SceneCameraUserControlledLimitsUpdatedEvent
+ *
+ * Camera min/max values to which the state is clamped before applying.
+ */
+struct CameraUserControlledLimits {
+    targetMin: ipp.schema.primitive.Vec3;
+    targetMax: ipp.schema.primitive.Vec3;
+    positionMin: ipp.schema.primitive.Vec3;
+    positionMax: ipp.schema.primitive.Vec3;
+    distanceMin: float;
+    distanceMax: float;
+    rotationPolarUpAngleCosMin: float;
+    rotationPolarUpAngleCosMax: float;
+}

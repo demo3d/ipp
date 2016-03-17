@@ -1,0 +1,29 @@
+namespace ipp.schema.resource.render.vertex;
+
+enum AttributeName : uint {
+    Position,
+    Normal,
+    Uv,
+    Color,
+    SkinningIndices,
+    SkinningWeights,
+    GroupIndices,
+    GroupWeights
+}
+
+enum ElementType : uint {
+    Float,
+    UShort,
+    Short,
+    UByte,
+    Byte,
+    Fixed
+}
+
+struct AttributeDefinition {
+    name: AttributeName;
+    index: uint;
+    elementType: ElementType;
+    elementCount: uint;
+    normalized: bool;
+}

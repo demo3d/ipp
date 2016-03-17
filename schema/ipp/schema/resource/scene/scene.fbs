@@ -1,0 +1,112 @@
+include "ipp/schema/primitive.fbs";
+include "animation.fbs";
+
+
+namespace ipp.schema.resource.scene;
+
+
+table ModelComponent {
+    meshResourcePath: string;
+    materialResourcePath: string;
+    armatureEntity: uint;
+}
+
+
+
+enum NodeRotationMode : int {
+    Quaternion = 0,
+    AxisAngle,
+    EulerXYZ,
+    EulerXZY,
+    EulerYXZ,
+    EulerYZX,
+    EulerZXY,
+    EulerZYX
+}
+
+struct NodeTransform {
+    translation: ipp.schema.primitive.Vec3;
+    rotation: ipp.schema.primitive.Vec4;
+    rotationMode: NodeRotationMode;
+    scale: ipp.schema.primitive.Vec3;
+}
+
+table NodeComponent {
+    parentEntity: uint;
+    transformParentingInverseMatrix: ipp.schema.primitive.Mat4;
+    transform: NodeTransform;
+}
+
+
+
+enum SensorFit: int {
+    Auto = 0,
+    Horizontal,
+    Vertical
+}
+
+table CameraComponent {
+    pixelSize: float;
+    sensorFit: SensorFit;
+    cameraShift: ipp.schema.primitive.Vec2;
+
+    clipNear: float;
+    clipFar: float;
+}
+
+
+
+table ArmatureComponent {
+    armatureResourcePath: string;
+}
+
+
+
+table DirectionalLight {
+    direction: ipp.schema.primitive.Vec3;
+    color: ipp.schema.primitive.Vec3;
+    ambientDiffuseIntensity: float;
+}
+
+union LightKind {
+    DirectionalLight
+}
+
+table LightComponent {
+    light: LightKind;
+    castShadow: bool;
+}
+
+
+union ComponentKind {
+    ModelComponent,
+    CameraComponent,
+    NodeComponent,
+    ArmatureComponent,
+    LightComponent
+}
+
+table Component {
+    component: ComponentKind;
+}
+
+
+
+table Entity {
+    id: uint;
+    name: string;
+    components: [Component];
+}
+
+
+
+table Scene {
+    entities: [Entity];
+    initialActiveCamera: uint;
+    animation: ipp.schema.resource.scene.Animation;
+}
+
+
+file_identifier "SCEN";
+file_extension "scene";
+root_type Scene;

@@ -1,0 +1,13 @@
+{
+  "name": "ipp",
+  "version": "0.0.4",
+  "registry": "npm",
+  "description": "IPP CAPI TypeScript wrapper library",
+  "author": "Rafael Munitić <rafael.munitic@gmail.com>",
+  "main": "lib/ipp.js",
+  "typings": "lib/ipp.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^1.8.2"
+  }
+}

@@ -1,0 +1,26 @@
+include "ipp/schema/primitive.fbs";
+
+namespace ipp.schema.resource.render.armature;
+
+
+struct BindPose {
+    translation: ipp.schema.primitive.Vec3;
+    rotation: ipp.schema.primitive.Quat;
+    scale: float;
+}
+
+table Bone {
+    name: string;
+    parentIndex: int;
+    bindPose: BindPose;
+    isDeformation: bool;
+}
+
+table Armature {
+    bones: [Bone];
+}
+
+
+root_type Armature;
+file_identifier "ARMT";
+file_extension "armature";

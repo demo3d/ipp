@@ -1,0 +1,19 @@
+include "vertex.fbs";
+
+namespace ipp.schema.resource.render.mesh;
+
+
+table VertexBuffer {
+    attributes: [ipp.schema.resource.render.vertex.AttributeDefinition];
+    buffer: [ubyte];
+}
+
+table Mesh {
+    vertices: VertexBuffer;
+    indices: [ubyte];
+    triangleCount: uint;
+}
+
+root_type Mesh;
+file_identifier "MESH";
+file_extension "mesh";

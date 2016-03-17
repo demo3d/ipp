@@ -1,0 +1,36 @@
+include "ipp/schema/primitive.fbs";
+include "animation.fbs";
+
+
+namespace ipp.schema.resource.scene;
+
+
+table MaterialTexture {
+    resourcePath: string;
+}
+
+table MaterialFloatUniform {
+    value: [float];
+}
+
+union MaterialPropertyKind {
+    MaterialTexture,
+    MaterialFloatUniform
+}
+
+table MaterialProperty {
+    name: string;
+    value: MaterialPropertyKind;
+}
+
+table MaterialDefinition {
+    effectResourcePath: string;
+    transparent: bool;
+    shadowCaster: bool;
+    properties: [MaterialProperty];
+}
+
+
+file_identifier "MTRL";
+file_extension "material";
+root_type MaterialDefinition;
